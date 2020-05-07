@@ -17,7 +17,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
-      appBar: AppBar(title: Text("Flutter App")),
+      appBar: AppBar(title: Text("Expense Planner")),
       body: Column(children: <Widget>[
         Card(child: Text("Chart"),),
         Card(child: Text("List items"))
