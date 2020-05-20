@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () => startTransactionAdd(context),
           child: Icon(Icons.add),
         ),
-        body: SingleChildScrollView(
+        body: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
