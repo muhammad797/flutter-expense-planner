@@ -4,6 +4,7 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> _transactions;
+
   TransactionList(this._transactions);
 
   @override
@@ -15,10 +16,12 @@ class TransactionList extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Container(
-                    child: Text('\$${item.amount}',
-                        style: TextStyle(color: Colors.purple)),
+                    child: Text('\$${item.amount.toStringAsFixed(2)}',
+                        style:
+                            TextStyle(color: Theme.of(context).primaryColor)),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.purple, width: 2)),
+                        border: Border.all(
+                            color: Theme.of(context).primaryColor, width: 2)),
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     margin: EdgeInsets.only(right: 10),
                   ),

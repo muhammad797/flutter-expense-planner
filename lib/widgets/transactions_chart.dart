@@ -6,11 +6,11 @@ class TransactionsChart extends StatelessWidget {
     return Container(
         child: Card(
           child: Container(
-            child: Text("Chart", style: TextStyle(color: Colors.white)),
+            child: Text("Chart", style: TextStyle(color: Colors.black)),
             padding: EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
           ),
           elevation: 3,
-          color: Colors.deepOrange,
+          color: Colors.amberAccent,
           margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 15),
         ),
         width: double.infinity);

@@ -1,6 +1,8 @@
+import 'package:expenseplanner/widgets/new_transaction.dart';
+import 'package:expenseplanner/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import './widgets/transactions_chart.dart';
-import './widgets/user_transactions.dart';
+import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,17 +13,58 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Planner',
       home: MyHomePage(),
+      theme: ThemeData(
+          primarySwatch: Colors.deepOrange, accentColor: Colors.amber),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> transactions = [
+    Transaction(
+        id: "1", title: "Macbook Air", amount: 99.99, date: DateTime.now()),
+    Transaction(
+        id: "2", title: "Macbook Pro", amount: 59.99, date: DateTime.now()),
+  ];
+
+  void addNewTransaction(String name, double amount) {
+    Transaction t = Transaction(
+        id: DateTime.now().toString(),
+        title: name,
+        amount: amount,
+        date: DateTime.now());
+    setState(() {
+      transactions.add(t);
+    });
+  }
+
+  void startTransactionAdd(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (BuildContext context) => NewTransaction(addNewTransaction));
+  }
+
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
         appBar: AppBar(
           title: Text("Expense Planner"),
-          backgroundColor: Colors.amber[800],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => startTransactionAdd(context),
+            )
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => startTransactionAdd(context),
+          child: Icon(Icons.add),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -29,7 +72,7 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               TransactionsChart(),
-              UserTransactions()
+              TransactionList(transactions)
             ],
           ),
         )));
