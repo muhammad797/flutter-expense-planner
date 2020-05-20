@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatefulWidget {
-  @override
-  _NewTransactionState createState() => _NewTransactionState();
-}
-
-class _NewTransactionState extends State<NewTransaction> {
+class NewTransaction extends StatelessWidget {
   final nameFieldController = TextEditingController();
   final priceFieldController = TextEditingController();
+  final Function onAdd;
+
+  NewTransaction(this.onAdd);
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +19,21 @@ class _NewTransactionState extends State<NewTransaction> {
           children: <Widget>[
             TextField(
                 decoration: InputDecoration(labelText: "Product name"),
-                controller: nameFieldController
-            ),
+                controller: nameFieldController),
             TextField(
-              decoration: InputDecoration(labelText: "Price"),
+              decoration:
+                  InputDecoration(labelText: "Price", prefix: Text("\$ ")),
               controller: priceFieldController,
             ),
-            FlatButton(
+            RaisedButton(
               child: Text("Add Transaction"),
-              textColor: Colors.purple,
+              textColor: Colors.white,
+              color: Colors.deepOrange,
               onPressed: () {
-                print(
-                    nameFieldController.text + " " + priceFieldController.text);
+                double amount = double.parse(priceFieldController.text);
+                onAdd(nameFieldController.text, amount);
+                nameFieldController.clear();
+                priceFieldController.clear();
               },
             )
           ],

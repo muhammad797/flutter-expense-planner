@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import './widgets/transactions_chart.dart';
-import './widgets/new_transaction.dart';
-import './widgets/transaction_list.dart';
+import './widgets/user_transactions.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,14 +23,15 @@ class MyHomePage extends StatelessWidget {
           title: Text("Expense Planner"),
           backgroundColor: Colors.amber[800],
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            TransactionsChart(),
-            NewTransaction(),
-            TransactionList()
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TransactionsChart(),
+              UserTransactions()
+            ],
+          ),
         )));
   }
 }
